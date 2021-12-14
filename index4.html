@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Shell Example</h1>
+    <button id="openBtn">Open a file</button>
+    <button id="saveBtn">save a file</button>
+    <button id="messageBtn">pupop a dialog</button>
+    <img id="image" style="width:100%">
+
+</body>
+<script>
+    const { dialog } = require('@electron/remote')
+    var openBtn = document.querySelector('#openBtn')
+    openBtn.onclick = function () {
+        dialog.showOpenDialog({
+            title: 'openfile',
+            filters: [{
+                name: 'jpg', extensions: ['jpg']
+            }],
+            buttonLabel: '选择图片'
+        }).then(result => {
+            if (result.canceled) {
+                console.log('Dialog was canceled')
+            } else {
+                const file = result.filePaths[0]
+                let image = document.querySelector('#image')
+                image.setAttribute("src", file)
+                // window.loadURL(`file://${file}`)
+            }
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+    const fs = require('fs')
+    var saveBtn = document.querySelector('#saveBtn')
+    saveBtn.onclick = function () {
+        dialog.showSaveDialog({
+            title: 'savefile',
+        }).then(result => {
+            console.log(result)
+            if (result.canceled) {
+                console.log('Dialog was canceled')
+            } else {
+                fs.writeFileSync(result.filePath, 'aaaa')
+            }
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
+    var messageBtn = document.querySelector('#messageBtn')
+    messageBtn.onclick = function () {
+        dialog.showMessageBox({
+            type: 'warning',
+            title: 'warning tag',
+            message: 'file dangous!!!',
+            buttons: ['yes', 'no']
+        }).then(result => {
+            if (result.canceled) {
+                console.log('Dialog was canceled')
+            } else {
+                console.log(result)
+            }
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+</script>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="notifyBtn">notify message</button>
+</body>
+<script>
+    var notifyBtn = document.querySelector('#notifyBtn')
+    var option = {
+        title: 'title',
+        body: 'message'
+    }
+    notifyBtn.onclick = function () {
+        new window.Notification(option.title, option)
+    }
+</script>
+
+</html>
