@@ -51,11 +51,6 @@ app.on('ready', () => {
         console.log('The global shortkey was pressed!')
     })
 
-    // It supports "special names". Check out the API documentation for a full
-    // list.
-    globalShortcut.register('VolumeUp', () => console.log('Turn it up!'))
-    globalShortcut.register('VolumeDown', () => console.log('Turn it down!'))
-
 })
 
 
